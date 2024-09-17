@@ -24,6 +24,8 @@ from langchain.vectorstores import FAISS
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'doc', 'docx'}
 UPLOAD_FOLDER = 'data/docs'  # Directory where uploaded files will be saved
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
@@ -91,10 +93,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 # Extract text from documents
 
-# Helper function to check if the uploaded file is allowed
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
+# Helper function to check if the uploaded file is allow
 # Define User Data Model
 class User(BaseModel):
     name: str
@@ -139,9 +138,9 @@ def parse_date(input_text):
         return "Invalid date"
 
 # Mock appointment booking tool
-def book_appointment(date, email, phone):
-    # Normally, this would call a booking API like Google Calendar
-    return f"Appointment successfully booked on {date} for {email}."
+# def book_appointment(date, email, phone):
+#     # Normally, this would call a booking API like Google Calendar
+#     return f"Appointment successfully booked on {date} for {email}."
 
 @app.route('/')
 def index():

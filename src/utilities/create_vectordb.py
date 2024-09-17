@@ -1,13 +1,12 @@
+import os
+import pickle
+import logging
+from typing import List
+from pathlib import Path
 from langchain.vectorstores import FAISS
 from langchain_community.document_loaders import DirectoryLoader, TextLoader, UnstructuredWordDocumentLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-import os
-import pickle
-from typing import List
-import logging
-from pathlib import Path
 from langchain.embeddings import HuggingFaceEmbeddings
-
 
 class MultiFormatDocumentLoader:
     """
@@ -41,37 +40,18 @@ class MultiFormatDocumentLoader:
 
 class PrepareFAISSVectorDB:
     """
-    A class for preparing and saving a FAISS VectorDB using OpenAI embeddings.
+    A class for preparing and saving a FAISS VectorDB using Hugging Face embeddings.
 
-    This class facilitates the process of loading documents, chunking them, and creating a FAISS VectorDB
-    with OpenAI embeddings. It provides methods to prepare and save the VectorDB.
+    This class facilitates the process of loading documents, chunking them, and creating a FAISS VectorDB.
+    It provides methods to prepare and save the VectorDB.
 
     Parameters:
-        data_directory (str): The directory containing the documents.
-        persist_directory (str): The directory to save the FAISS index and metadata.
-        embedding_model_engine (str): The engine for OpenAI embeddings.
-        chunk_size (int): The size of the chunks for document processing.
-        chunk_overlap (int): The overlap between chunks.
+        app_config (object): Configuration object containing directories, chunk size, overlap, and embeddings.
     """
 
-    def __init__(
-            self,
-            # data_directory: str,
-            # persist_directory: str,
-            # chunk_size: int,
-            # chunk_overlap: int,
-            # embeddings: str,
-            app_config
-    ) -> None:
+    def __init__(self, app_config) -> None:
         """
         Initialize the PrepareFAISSVectorDB instance.
-
-        Parameters:
-            data_directory (str): The directory containing the documents.
-            persist_directory (str): The directory to save the FAISS index and metadata.
-            embedding_model_engine (str): The engine for OpenAI embeddings.
-            chunk_size (int): The size of the chunks for document processing.
-            chunk_overlap (int): The overlap between chunks.
         """
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=app_config.chunk_size,
@@ -89,85 +69,70 @@ class PrepareFAISSVectorDB:
         Returns:
             List: A list of chunked documents.
         """
-        print("Loading documents from the directory...")
+        logging.info("Loading documents from the directory...")
 
         # Use MultiFormatDocumentLoader to load documents from multiple formats
         loader = MultiFormatDocumentLoader(self.data_directory)
         docs = loader.load_documents()
 
-        print(f"Loaded {len(docs)} documents. Now chunking the documents...")
+        logging.info(f"Loaded {len(docs)} documents. Now chunking the documents...")
 
         # Chunk the loaded documents
         chunked_documents = self.text_splitter.split_documents(docs)
-
-        logging.info(f"Chunked the documents into {len(chunked_documents)} chunks.\n")
-        # print(f"Chunked the documents into {len(chunked_documents)} chunks.\n")
+        logging.info(f"Chunked the documents into {len(chunked_documents)} chunks.")
         return chunked_documents
 
-    def prepare_and_save_vectordb(self):
+    def prepare_and_save_vectordb(self) -> FAISS:
         """
-        Load, chunk, and create a FAISS VectorDB with OpenAI embeddings, and save it.
+        Load, chunk, and create a FAISS VectorDB with Hugging Face embeddings, and save it.
 
         Returns:
             FAISS: The created FAISS VectorDB.
         """
         # Load and chunk the documents
         chunked_documents = self.__load_and_chunk_documents()
-        texts = [chunk.page_content for chunk in chunked_documents] 
+        texts = [chunk.page_content for chunk in chunked_documents]
         logging.info("Preparing FAISS VectorDB...")
 
-        # Create FAISS vector store
+        # Create FAISS vector store using Hugging Face embeddings
         vectordb = FAISS.from_texts(
             texts=texts,
             embedding=HuggingFaceEmbeddings(model_name=self.embedding)
         )
 
-        # Save FAISS index and metadata
+        # Define paths for saving the FAISS index and metadata
         faiss_index_path = os.path.join(self.persist_directory, "faiss_index")
         metadata_path = os.path.join(self.persist_directory, "faiss_metadata.pkl")
 
         # Save FAISS index
         vectordb.save_local(faiss_index_path)
 
-        # Save metadata (to match the FAISS index with the original documents)
+        # Save metadata to match the FAISS index with the original documents
         with open(metadata_path, "wb") as metadata_file:
             pickle.dump(chunked_documents, metadata_file)
 
         logging.info("FAISS VectorDB is created and saved.")
-        logging.info(f"Number of vectors in the VectorDB: {len(chunked_documents)}\n\n")
-
+        logging.info(f"Number of vectors in the VectorDB: {len(chunked_documents)}")
         return vectordb
 
-    def load_vectordb(self):
+    def load_vectordb(self) -> FAISS:
         """
         Load the FAISS index and metadata from the persist directory.
 
         Returns:
             FAISS: The loaded FAISS VectorDB.
         """
-        print("Loading FAISS VectorDB...")
+        logging.info("Loading FAISS VectorDB...")
 
         faiss_index_path = os.path.join(self.persist_directory, "faiss_index")
         metadata_path = os.path.join(self.persist_directory, "faiss_metadata.pkl")
 
-        # Load FAISS index with dangerous deserialization allowed (if trusted)
+        # Load FAISS index
         vectordb = FAISS.load_local(faiss_index_path, self.embedding, allow_dangerous_deserialization=True)
 
         # Load metadata (original documents)
         with open(metadata_path, "rb") as metadata_file:
             chunked_documents = pickle.load(metadata_file)
 
-        logging.info(f"Loaded FAISS VectorDB with {len(chunked_documents)} vectors.\n")
+        logging.info(f"Loaded FAISS VectorDB with {len(chunked_documents)} vectors.")
         return vectordb
-
-
-
-# # Instantiate the configuration loader
-# if __name__ == "__main__":
-#     from load_configuration import LoadConfiguration
-#     app_config = LoadConfiguration()
-#     c = PrepareFAISSVectorDB(app_config)
-#     c.prepare_and_save_vectordb()
-#     print("===========>")
-#     c.load_vectordb()
-  

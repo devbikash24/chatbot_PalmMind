@@ -63,6 +63,7 @@ class LoadConfiguration:
             self.load_embedding_config(app_config)
             self.load_llm_configs(app_config)
             self.load_chat_memory(app_config)
+            self.load_env_variables()
 
         except FileNotFoundError:
             logging.error(f"Configuration file not found at {config_path}.")
@@ -78,6 +79,9 @@ class LoadConfiguration:
         """
         self.directories_for_doc = here() / app_config['directories']['directories_for_docs']
         self.persistent_directory = here() / app_config['directories']['persist_directory']
+        self.faiss_folder_for_index = here() / app_config['directories']['faiss_folder_for_index']
+        self.faiss_folder = here() / app_config['directories']['faiss_folder']
+        self.allowed_extension =app_config['directories']['allowed_extension']
         logging.info("Directories loaded successfully.")
 
     def load_splitter_config(self, app_config: dict) -> None:
@@ -125,6 +129,16 @@ class LoadConfiguration:
         self.number_of_q_a_pairs = app_config["memory"]["number_of_q_a_pairs"]
         logging.info("Chat memory configuration loaded successfully.")
 
+
+    def load_env_variables(self):
+        """
+        Loads environment variables for the chatbot.
+        """
+        self.secret_key  = os.getenv('SECRET_KEY', 'your-secret-key')
+        self.groq_key = os.getenv('GROQ_ENV')
+
+
+        logging.info("Environment variables loaded successfully.")
 
 # Instantiate the configuration loader
 if __name__ == "__main__":

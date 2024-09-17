@@ -6,6 +6,9 @@ directories:
   # # directory_with_images: images/
   # # directory_with_pdfs: pdfs/
   persist_directory: data/faiss
+  faiss_folder_for_index: data/faiss/faiss_index
+  faiss_folder: 'data/faiss'
+  allowed_extension: {txt', 'pdf', 'doc', 'docx'}
 
 
 splitter_config: 
@@ -18,7 +21,7 @@ embeddings:
 
 
 llm_config: 
-  model_name: llama3
+  model_name: llama3-8b-8192
   temperature: 0.0
   # top_p: ""
   # stop: None
