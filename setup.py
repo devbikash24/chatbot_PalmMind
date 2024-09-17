@@ -10,10 +10,10 @@ setup(
     author="Bikash Dev",  # Replace with your name
     author_email="devbikash24@gmail.com",  # Replace with your email
     description="""
+Develop a chatbot capable of answering user queries based on any uploaded documents while incorporating a conversational form to collect user information (such as Name, Phone Number, and Email) when the user requests a callback. The project leverages LangChain and Gemini (or any suitable large language models) to handle the chatbot's functionality.
 
-     a Chatbot that can answer user queries from any documents and add a conversational form for collecting user information (Name, Phone Number, Email) when user ask chatbot to call them, You can use LangChain & Gemini/or any LLMs to complete the project.
-
-Also, integrate conversational form (book appointment) with tool-agents. Integration of  conversational form with agent-tools, extract complete date format like (YYYY-MM-DD) from users query (eg. Next Monday, and integrate validation in user input with conversational form (like email, phone number) etc.
+Additionally, the chatbot integrates a conversational form for booking appointments, utilizing tool agents to manage this process. The form also extracts full date formats (e.g., YYYY-MM-DD) from user queries, such as "Next Monday," and validates user inputs like email addresses and phone numbers to ensure accuracy and completeness.
+     
 """,  # Short description
     long_description=long_description,
     long_description_content_type="text/markdown",
