@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# IPython
+profile_default/
+ipython_config.py
+
+
+
+# dotenv
+.env
+.venv
+venv/
+ENV/
+env.bak/
+venv.bak/
+palmenv/
+
+# VS Code
+.vscode/
+
+
+
+# Flask specific
+instance/
+.webassets-cache
+
+
+# Pylint
+pylint.log
+
+
+
+# MacOS files
+.DS_Store
+
+# Logs
+*.log
+
+# Python compiled files
+*.pyc
+
+.env
+

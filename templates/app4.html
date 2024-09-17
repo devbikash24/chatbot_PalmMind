@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot with Conversational Form</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1 class="chat-header" style="text-align: center;">Chat with Palm Assistant</h1>
+        <div class="powered-by">
+            <p>Model Used: <span id="model-info">Llama 3</span></p>
+        </div>
+
+        <!-- Action Buttons Section -->
+        <div class="action-buttons">
+            <button id="call-me-button" aria-label="Call Me">Call Me</button>
+            <button id="book-appointment-button" aria-label="Book Appointment">Book an Appointment</button>
+            <button id="query-document-button" aria-label="Query Document">Query Document</button>
+        </div>
+
+        <!-- Chat Display Section -->
+        <div id="chat-box" class="chat-box" aria-live="polite" aria-atomic="true"></div>
+
+        <!-- Call Me Form Section -->
+        <div id="call-me-form" class="user-form" style="display:none;">
+            <form id="call-me-info-form" aria-label="Call Me Form">
+                <h2>Enter your contact details for a callback:</h2>
+                <label for="call-me-name">Name:</label>
+                <input type="text" id="call-me-name" name="name" required>
+
+                <label for="call-me-phone">Phone:</label>
+                <input type="tel" id="call-me-phone" name="phone" required pattern="[0-9]{10}">
+
+                <label for="call-me-email">Email:</label>
+                <input type="email" id="call-me-email" name="email" required>
+
+                <button type="submit">Submit Call Me</button>
+            </form>
+        </div>
+
+        <!-- Book Appointment Form Section -->
+        <div id="appointment-form" class="user-form" style="display:none;">
+            <form id="appointment-info-form" aria-label="Appointment Booking Form">
+                <h2>Book an Appointment:</h2>
+                <label for="appointment-name">Name:</label>
+                <input type="text" id="appointment-name" name="name" required>
+
+                <label for="appointment-phone">Phone:</label>
+                <input type="tel" id="appointment-phone" name="phone" required pattern="[0-9]{10}">
+
+                <label for="appointment-email">Email:</label>
+                <input type="email" id="appointment-email" name="email" required>
+
+                <label for="appointment-date">Preferred Date:</label>
+                <input type="text" id="appointment-date" name="date" placeholder="e.g., 'next Monday' or '2024-09-20'" required>
+
+                <button type="submit">Submit Booking</button>
+            </form>
+        </div>
+
+        <!-- Document Upload Form Section -->
+        <div id="upload-form" class="user-form" style="display:none;">
+            <form id="upload-document-form" method="post" enctype="multipart/form-data" aria-label="Upload Document Form">
+                <h2>Upload a document to query:</h2>
+                <label for="document">Document:</label>
+                <input type="file" id="document" name="document" accept=".pdf,.txt,.doc,.docx" required>
+
+                <button type="submit">Upload Document</button>
+            </form>
+        </div>
+
+        <!-- Document Query Form Section -->
+        <div id="query-form" class="user-form" style="display:none;">
+            <form id="query-document-form" method="post" aria-label="Query Document Form">
+                <h2>Ask a question about the document:</h2>
+                <label for="query">Query:</label>
+                <input type="text" id="query" name="query" placeholder="Enter your query" required>
+
+                <button type="submit">Submit Query</button>
+            </form>
+        </div>
+
+        <!-- User Message Input Section -->
+        <div class="input-area">
+            <input type="text" id="user-message" placeholder="Type a message...">
+            <button id="send-message" aria-label="Send Message">Send</button>
+        </div>
+    </div>
+
+    <script src="/static/scripts.js"></script>
+</body>
+</html>
