@@ -8,53 +8,62 @@
 </head>
 <body>
     <div class="chat-container">
-        <h2>Chat with our Assistant</h2>
+        <h1 class="chat-header" style="text-align: center;">Chat with Palm Assistant</h1>
+        <div class="powered-by">
+            <p>Model Used: <span id="model-info">Llama 3</span></p>
+        </div>
 
-        <!-- Chat Display Area -->
-        <div id="chat-box" class="chat-box"></div>
+        <!-- Action Buttons Section -->
+        <div class="action-buttons">
+            <button id="call-me-button" aria-label="Call Me">Call Me</button>
+            <button id="book-appointment-button" aria-label="Book Appointment">Book an Appointment</button>
+            <button id="query-document-button" aria-label="Query Document">Query Document</button>
+        </div>
 
-        <!-- Call Me Form (hidden by default) -->
+        <!-- Chat Display Section -->
+        <div id="chat-box" class="chat-box" aria-live="polite" aria-atomic="true"></div>
+
+        <!-- Call Me Form Section -->
         <div id="call-me-form" class="user-form" style="display:none;">
-            <form id="call-me-info-form">
-                <h3>Enter your contact details for a callback:</h3>
-                <label for="name">Name:</label>
-                <input type="text" id="call-me-name" required>
-                
-                <label for="phone">Phone:</label>
-                <input type="text" id="call-me-phone" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="call-me-email" required>
+            <form id="call-me-info-form" aria-label="Call Me Form">
+                <h2>Enter your contact details for a callback:</h2>
+                <label for="call-me-name">Name:</label>
+                <input type="text" id="call-me-name" name="name" required>
+
+                <label for="call-me-phone">Phone:</label>
+                <input type="tel" id="call-me-phone" name="phone" required pattern="[0-9]{10}">
+
+                <label for="call-me-email">Email:</label>
+                <input type="email" id="call-me-email" name="email" required>
 
                 <button type="submit">Submit Call Me</button>
             </form>
         </div>
 
-        <!-- Book Appointment Form (hidden by default) -->
+        <!-- Book Appointment Form Section -->
         <div id="appointment-form" class="user-form" style="display:none;">
-            <form id="appointment-info-form">
-                <h3>Book an Appointment:</h3>
-                <label for="name">Name:</label>
-                <input type="text" id="appointment-name" required>
-                
-                <label for="phone">Phone:</label>
-                <input type="text" id="appointment-phone" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="appointment-email" required>
+            <form id="appointment-info-form" aria-label="Appointment Booking Form">
+                <h2>Book an Appointment:</h2>
+                <label for="appointment-name">Name:</label>
+                <input type="text" id="appointment-name" name="name" required>
 
-                <label for="date">Preferred Date:</label>
-                <input type="text" id="appointment-date" placeholder="e.g., 'next Monday', 'tomorrow', or '2024-09-20'" required>
+                <label for="appointment-phone">Phone:</label>
+                <input type="tel" id="appointment-phone" name="phone" required pattern="[0-9]{10}">
+
+                <label for="appointment-email">Email:</label>
+                <input type="email" id="appointment-email" name="email" required>
+
+                <label for="appointment-date">Preferred Date:</label>
+                <input type="text" id="appointment-date" name="date" placeholder="e.g., 'next Monday' or '2024-09-20'" required>
 
                 <button type="submit">Submit Booking</button>
             </form>
         </div>
 
-        <!-- Upload Document Form (hidden by default) -->
-        <!-- Upload Document Form (hidden by default) -->
+        <!-- Document Upload Form Section -->
         <div id="upload-form" class="user-form" style="display:none;">
-            <form id="upload-document-form"  method="post" enctype="multipart/form-data">
-                <h3>Upload a document to query:</h3>
+            <form id="upload-document-form" method="post" enctype="multipart/form-data" aria-label="Upload Document Form">
+                <h2>Upload a document to query:</h2>
                 <label for="document">Document:</label>
                 <input type="file" id="document" name="document" accept=".pdf,.txt,.doc,.docx" required>
 
@@ -62,10 +71,10 @@
             </form>
         </div>
 
-        <!-- Query Form (hidden by default) -->
+        <!-- Document Query Form Section -->
         <div id="query-form" class="user-form" style="display:none;">
-            <form id="query-document-form" method="post">
-                <h3>Ask a question about the document:</h3>
+            <form id="query-document-form" method="post" aria-label="Query Document Form">
+                <h2>Ask a question about the document:</h2>
                 <label for="query">Query:</label>
                 <input type="text" id="query" name="query" placeholder="Enter your query" required>
 
@@ -73,10 +82,10 @@
             </form>
         </div>
 
-        <!-- Message Input -->
+        <!-- User Message Input Section -->
         <div class="input-area">
             <input type="text" id="user-message" placeholder="Type a message...">
-            <button id="send-message">Send</button>
+            <button id="send-message" aria-label="Send Message">Send</button>
         </div>
     </div>
 
