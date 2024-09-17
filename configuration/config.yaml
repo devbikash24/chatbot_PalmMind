@@ -1,11 +1,11 @@
 directories:
-  directories_for_pdfs: data/docs
+  directories_for_docs: data/docs
   # text_document_directories: data/text_documents
   # directory_for_uploaded_sqldb: data/uploaded_files_sqldb.db
   # stored_csv_xlsx_sqldb_directory: data/csv_xlsx_sqldb.db
   # # directory_with_images: images/
   # # directory_with_pdfs: pdfs/
-  # persist_directory: data/chroma
+  persist_directory: data/faiss
 
 
 splitter_config: 
@@ -19,12 +19,11 @@ embeddings:
 
 llm_config: 
   model_name: llama3
-  embedding_model_name: llama3-8b-8192
   temperature: 0.0
-  top_p: ""
-  stop: None
+  # top_p: ""
+  # stop: None
   max_tokens: 300
-  rag_llm_system_role: "You are a chatbot. You'll receive a prompt that includes a chat history, retrieved content from the vectorDB based on the user's question, and the source.\ 
+  llm_system_role: "You are a chatbot. You'll receive a prompt that includes a chat history, retrieved content from the vectorDB based on the user's question, and the source.\ 
     Your task is to respond to the user's new question using the information from the vectorDB without relying on your own knowledge.\
     you will receive a prompt with the the following format:
 
@@ -39,4 +38,6 @@ llm_config:
     New question
     "
 
+memory:
+  number_of_q_a_pairs: 2
 

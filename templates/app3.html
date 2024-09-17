@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot with Conversational Form</title>
+    <link rel="stylesheet" href="/static/app3.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Chat with our Assistant</h2>
+
+        <!-- Chat Display Area -->
+        <div id="chat-box" class="chat-box"></div>
+
+        <!-- Call Me Form (hidden by default) -->
+        <div id="call-me-form" class="user-form" style="display:none;">
+            <form id="call-me-info-form">
+                <h3>Enter your contact details for a callback:</h3>
+                <label for="name">Name:</label>
+                <input type="text" id="call-me-name" required>
+                
+                <label for="phone">Phone:</label>
+                <input type="text" id="call-me-phone" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="call-me-email" required>
+
+                <button type="submit">Submit Call Me</button>
+            </form>
+        </div>
+
+        <!-- Book Appointment Form (hidden by default) -->
+        <div id="appointment-form" class="user-form" style="display:none;">
+            <form id="appointment-info-form">
+                <h3>Book an Appointment:</h3>
+                <label for="name">Name:</label>
+                <input type="text" id="appointment-name" required>
+                
+                <label for="phone">Phone:</label>
+                <input type="text" id="appointment-phone" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="appointment-email" required>
+
+                <label for="date">Preferred Date:</label>
+                <input type="text" id="appointment-date" placeholder="e.g., 'next Monday', 'tomorrow', or '2024-09-20'" required>
+
+                <button type="submit">Submit Booking</button>
+            </form>
+        </div>
+
+        <!-- Upload Document Form (hidden by default) -->
+        <!-- Upload Document Form (hidden by default) -->
+        <div id="upload-form" class="user-form" style="display:none;">
+            <form id="upload-document-form" enctype="multipart/form-data">
+                <h3>Upload a document to query:</h3>
+                <label for="document">Document:</label>
+                <input type="file" id="document" accept=".pdf,.txt,.doc,.docx" required>
+
+                <button type="submit">Upload Document</button>
+            </form>
+        </div>
+
+        <!-- Query Form (hidden by default) -->
+        <div id="query-form" class="user-form" style="display:none;">
+            <form id="query-document-form">
+                <h3>Ask a question about the document:</h3>
+                <label for="query">Query:</label>
+                <input type="text" id="query" placeholder="Enter your query" required>
+
+                <button type="submit">Submit Query</button>
+            </form>
+        </div>
+
+        <!-- Message Input -->
+        <div class="input-area">
+            <input type="text" id="user-message" placeholder="Type a message...">
+            <button id="send-message">Send</button>
+        </div>
+    </div>
+
+    <script src="/static/app4.js"></script>
+</body>
+</html>

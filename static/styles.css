@@ -1,0 +1,37 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.chat {
+    margin-top: 50px;
+}
+
+.card {
+    height: 500px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+}
+
+.msg_card_body {
+    overflow-y: auto;
+    height: 350px;
+}
+
+.user_img, .user_img_msg {
+    height: 10px;
+    width: 10px;
+}
+
+.msg_time, .msg_time_send {
+    font-size: 12px;
+}
+
+.type_msg {
+    border: none;
+    outline: none;
+}
+
+.send_btn {
+    background-color: #05728f;
+    color: white;
+}
