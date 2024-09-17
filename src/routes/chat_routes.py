@@ -21,7 +21,7 @@ def index():
     If user information is in the session, the form will not be shown.
     """
     show_form = 'user_info' not in session
-    return render_template('app4.html', show_form=show_form)
+    return render_template('index.html', show_form=show_form)
 
 @chat_bp.route('/query-document', methods=['POST'])
 def submit_query_document():
