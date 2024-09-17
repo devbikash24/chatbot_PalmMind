@@ -82,7 +82,13 @@ To install and set up the project, follow these steps:
 # Screenshots
 
 ## When App Loads First Time
+![alt text](static/images/image.png)
 
-![alt text](image.png)
+## Conversational form example
+![alt text](static/images/image-1.png)
+
+## Response Example
+![alt text](static/images/image2.png)
+
 
 
