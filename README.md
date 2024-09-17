@@ -79,3 +79,10 @@ To install and set up the project, follow these steps:
     ```
 
 
+# Screenshots
+
+## When App Loads First Time
+
+![alt text](image.png)
+
+
