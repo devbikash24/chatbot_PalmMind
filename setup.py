@@ -5,10 +5,10 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="conversational_chatbot",  # Replace with your project name
-    version="0.1.0",  # Initial version of your project
-    author="Bikash Dev",  # Replace with your name
-    author_email="devbikash24@gmail.com",  # Replace with your email
+    name="conversational_chatbot", 
+    version="0.1.0", 
+    author="Bikash Dev",  
+    author_email="devbikash24@gmail.com", 
     description="""
 Develop a chatbot capable of answering user queries based on any uploaded documents while incorporating a conversational form to collect user information (such as Name, Phone Number, and Email) when the user requests a callback. The project leverages LangChain and Gemini (or any suitable large language models) to handle the chatbot's functionality.
 
