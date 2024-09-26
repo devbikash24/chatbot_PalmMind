@@ -62,12 +62,12 @@ def extract_date(query: str) -> Optional[str]:
 if __name__ == "__main__":
     # Validate email and phone number
     email = "test@example.com"
-    phone = "+1234567890"
+    phone = "+12345678"
     print(validate_email(email))  # True
     print(validate_phone_number(phone))  # True
 
     # Create a user instance
-    user = User(name="John Doe", phone_number=phone, email=email)
+    user = User(name="Welcome me", phone_number=phone, email=email)
     print(user)
 
     # Extract date from a query
